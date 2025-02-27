@@ -15,6 +15,10 @@ general:
       nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
       nginx.ingress.kubernetes.io/use-regex: "true"
       nginx.ingress.kubernetes.io/rewrite-target: /$1
+      # nginx.ingress.kubernetes.io/proxy-body-size: 500m
+      # nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+      # nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+      # nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
     ## - Labels to add to the Ingress resource
     labels: {}
     # Certificate options
@@ -61,8 +65,6 @@ general:
   webVersionOverride: ""
   # Disable account registration on web vault
   disableUserRegistration: "false"
-  # Have I Been Pwned API Key
-  hibpApiKey: "false"
   # Comma-separated list of email addresses for Admin users
   admins: "false"
   email:
@@ -74,6 +76,12 @@ general:
     smtpPort: "587"
     # Whether your SMTP server uses an encryption protocol, "true" for SSL, "false" for TLS
     smtpSsl: "false"
+    # Specify true to explicitly trust the certificate presented by the SMTP server (not recommended for production).
+    smtpTrustServer: "false"
+    # Specify true to use SSL (not TLS) on port 25.
+    smtpSslOverride: "false"
+    # Specify true to force STARTTLS (Opportunistic TLS).
+    smtpStartTls: "false"
   # Custom labels to add throughout the installation
   labels: {}
   # Specifies the access mode for persistent volume claims.  This should not be changed in most cases, and the allowable
@@ -84,6 +92,8 @@ general:
   enableCloudCommunication: false
   # Cloud region for sync.  Please see: https://bitwarden.com/help/families-for-enterprise-self-hosted/#step-1-enable-cloud-communication
   cloudRegion: US
+  # Uncomment but leave as an empty string if deploying offline or in an air-gap environment
+  # pushRelayBaseUri:
 
 # Specify the name of the shared storage class
 # This storage class requires ReadWriteMany.  You will need to provide your own storage class.  Storage classes with automatic volume previsioners are recommended.
@@ -112,6 +122,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -130,6 +142,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -148,6 +162,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -166,6 +182,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -184,6 +202,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -202,6 +222,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -220,6 +242,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -238,6 +262,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -256,6 +282,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
@@ -274,6 +302,8 @@ component:
       limits:
         memory: "128Mi"
         cpu: "100m"
+    # Specifies the strategy used to replace old Pods by new ones. The value can be "Recreate" or "RollingUpdate". "RollingUpdate" is the default value.
+    deploymentStrategy: RollingUpdate
     # This will set the Kubernetes container security context
     securityContext:
     # Run the pod under a service account you create.  This is especially useful for OpenShift deployments
