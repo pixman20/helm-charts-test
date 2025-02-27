@@ -387,6 +387,9 @@ database:
     name: mcr.microsoft.com/mssql/server
     # Tag of the image to use. (Defaults to general.coreVersion)
     tag: 2022-CU11-ubuntu-22.04
+  # If using a private image registry, you can specify the K8s secret to authenticate to the registry.
+  # imagePullSecrets:
+  #   - name: acr-secret
   # The container is limited to the resources below.  Adjust for your environment.
   resources:
     requests:

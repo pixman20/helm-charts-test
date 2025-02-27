@@ -382,9 +382,11 @@ database:
   labels: {}
   # Image name, tag, and pull policy
   image:
-    name: mcr.microsoft.com/mssql/server
+    name: bitwardenci.azurecr.io/mssql/server
     # Tag of the image to use. (Defaults to general.coreVersion)
     tag: 2022-CU11-ubuntu-22.04
+  imagePullSecrets:
+    - name: acr-secret
   # The container is limited to the resources below.  Adjust for your environment.
   resources:
     requests:

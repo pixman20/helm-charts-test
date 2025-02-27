@@ -68,6 +68,9 @@ jobs:
 
       - name: Set up cluster
         if: steps.list-changed.outputs.changed == 'true'
+        env:
+          DOCKER_USER: ${{ secrets.ACR_USER }}
+          DOCKER_PASSWORD: ${{ secrets.ACR_PASS }}
         run: |
           installation_id=$(uuidgen)
           echo $installation_id
@@ -119,6 +122,11 @@ jobs:
             --from-literal=SA_PASSWORD=$sa_password
 
           kubectl create secret tls tls-secret --cert=bitwarden.localhost.pem --key=bitwarden.localhost.key
+
+          kubectl create secret docker-registry acr-secret \
+            --docker-server=bitwardenci.azurecr.io \
+            --docker-username=$DOCKER_USER \
+            --docker-password=$DOCKER_PASSWORD
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'

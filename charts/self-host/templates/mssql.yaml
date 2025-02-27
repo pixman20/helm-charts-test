@@ -89,6 +89,10 @@ spec:
           securityContext:
 {{ toYaml .Values.database.securityContext | indent 12 }}
           {{- end }}
+      {{- if .Values.database.imagePullSecrets }}
+      imagePullSecrets:
+{{ toYaml .Values.database.imagePullSecrets | indent 8 }}
+      {{- end }}
       enableServiceLinks: false
       volumes:
         - name: mssql-data
