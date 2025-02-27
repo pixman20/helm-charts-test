@@ -22,6 +22,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup upterm session
+        uses: lhotari/action-upterm@v1
+        with:
+          limit-access-to-actor: true
+
       - name: Set up Helm
         uses: Azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3.5
         with:
