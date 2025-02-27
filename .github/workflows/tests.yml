@@ -122,7 +122,12 @@ jobs:
 
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
-        run: ct install --target-branch ${{ github.event.repository.default_branch }} --skip-clean-up --namespace bitwarden
+        run: |
+          ct install \
+            --target-branch ${{ github.event.repository.default_branch }} \
+            --skip-clean-up \
+            --namespace bitwarden \
+            --helm-extra-args '--timeout 10m'
 
       - name: Test install (self-host)
         if: steps.list-changed.outputs.changed == 'true' && contains(steps.list-changed.outputs.changed-list,'self-host')
