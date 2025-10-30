@@ -133,7 +133,7 @@ jobs:
             # Add full changelog link
             if [[ -n "$last_tag" ]]; then
               echo ""
-              echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${last_tag}...${_CHART_NAME}-\${chart_version}"
+              echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${last_tag}...${_CHART_NAME}-${chart_version}"
             fi
           } > "$changelog_file"
 
