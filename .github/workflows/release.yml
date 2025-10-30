@@ -30,10 +30,10 @@ jobs:
           ref: main
           persist-credentials: false
 
-      # - name: Setup git
-      #   run: |
-      #     git config --local user.email "106330231+bitwarden-devops-bot@users.noreply.github.com"
-      #     git config --local user.name "bitwarden-devops-bot"
+      - name: Setup git
+        run: |
+          git config --local user.email "3723676+pixman20@users.noreply.github.com"
+          git config --local user.name "pixman20"
 
       - name: Set up Helm
         uses: Azure/setup-helm@5119fcb9089d432beecbf79bb2c7915207344b78 # v3.5
