@@ -34,36 +34,6 @@ jobs:
         with:
           version: 'v3.13.1'
 
-      - name: Log in to Azure
-        uses: bitwarden/gh-actions/azure-login@main
-        with:
-          subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-          tenant_id: ${{ secrets.AZURE_TENANT_ID }}
-          client_id: ${{ secrets.AZURE_CLIENT_ID }}
-
-      - name: Set up GPG key and passphrase
-        run: |
-          az keyvault secret download \
-            --vault-name bitwarden-ci \
-            --name helm-signing-gpg-private-key \
-            --file private
-
-          az keyvault secret download \
-          --vault-name bitwarden-ci \
-          --name helm-signing-gpg-private-key-passphrase \
-          --file .passphrase
-
-          az keyvault secret download \
-          --vault-name bitwarden-ci \
-          --name helm-signing-gpg-public-key \
-          --file public
-
-          gpg --dearmor private
-          gpg --dearmor public
-
-      - name: Log out from Azure
-        uses: bitwarden/gh-actions/azure-logout@main
-
       - name: Generate release notes
         id: release_notes
         run: |
@@ -94,18 +64,9 @@ jobs:
         id: helm_package
         run: |
           helm package \
-            --sign \
-            --key "DevOps Team" \
-            --keyring private.gpg \
-            --passphrase-file .passphrase \
             "charts/${_CHART_NAME}"
           PKG_NAME=$(ls ./*.tgz)
           echo "name=$PKG_NAME" >> "$GITHUB_OUTPUT"
-
-      - name: Verify Helm chart
-        env:
-          _HELM_OUTPUT_NAME: ${{ steps.helm_package.outputs.name }}
-        run: helm verify "${_HELM_OUTPUT_NAME}" --keyring public.gpg
 
       - name: Upload Helm chart artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
