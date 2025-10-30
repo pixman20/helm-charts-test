@@ -38,6 +38,11 @@ jobs:
       - name: Generate release notes
         id: release_notes
         run: |
+          git log --tags --simplify-by-decoration --pretty="format:%ai %H %d"
+
+          # Find the most recent tag for this chart
+          git describe --tags --abbrev=0 --match="${_CHART_NAME}-*"
+
           # Get the last release tag
             LAST_TAG=$(git describe --tags --abbrev=0 --match="${_CHART_NAME}-*" 2>/dev/null || echo "")
           
